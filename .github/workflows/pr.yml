@@ -10,9 +10,16 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
-#      - name: Split branch name
+      - uses: bhowell2/github-substring-action
+        id: one
         env:
-            BRANCH: ${{ github.ref_name }}
+          BRANCH: ${{ github.ref_name }}
+        with:
+          value: "abc123"
+          index_of_str: "ab"
+
+#      - name: Split branch name
+
 #        id: split
 #        run: echo "::set-output name=fragment::${BRANCH##*/}"
 
