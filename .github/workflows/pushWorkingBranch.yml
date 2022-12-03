@@ -4,6 +4,9 @@ on:
       - 'main'
       - 'releases/**-alpha'
 name: Deploy working branch on push
+runs:
+  using: 'node16'
+  main: 'index.js'
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -11,10 +14,6 @@ jobs:
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
-
-      - name: nodajs
-        using: 'node16'
-        main: 'index.js'
 
       - name: Set output
         id: vars
