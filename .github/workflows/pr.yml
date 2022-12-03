@@ -10,6 +10,12 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
+      - name: Split branch name
+        env:
+            BRANCH: ${{ github.ref_name }}
+        id: split
+        run: echo "::set-output name=fragment::${BRANCH##*/}"
+
       - name: Get Token
         run: | 
           curl --location --request GET 'https://cpanel19.d.fozzy.com:2083/execute/SubDomain/addsubdomain?domain=${{ github.event.pull_request.head.ref }}&rootdomain=test-metall.site&dir=/stages/${{ github.event.pull_request.head.ref }}' --header 'Authorization: cpanel vychevs2:GVJV33J98LLRDASZU5A9JPGVMYI87RU1'
@@ -21,4 +27,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           local-dir: ./src/
-          server-dir: ./stages/${{ github.event.pull_request.head.ref }}/
+          server-dir: ./stages/${BRANCH}/
