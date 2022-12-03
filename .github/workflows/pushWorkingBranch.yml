@@ -12,6 +12,10 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
+      - name: nodajs
+        using: 'node16'
+        main: 'index.js'
+
       - name: Set output
         id: vars
         run: echo ::set-output name=branch::${GITHUB_REF#refs/*/}
