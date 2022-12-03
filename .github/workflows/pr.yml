@@ -19,8 +19,8 @@ jobs:
         uses: bhowell2/github-substring-action@v1.0.0
         id: one
         with:
-          value: "abc1234"
-          index_of_str: "ab"
+          value: ${{ env.branch_name }}
+          index_of_str: "mp-"
 
       - name: Set branch number env
         id: step_one2
