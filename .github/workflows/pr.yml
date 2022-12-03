@@ -10,9 +10,33 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
+      - name: Set branch name env
+        id: step_one
+        run: |
+          echo "branch_name=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
+
+      - name: Get branch number
+        uses: bhowell2/github-substring-action@v1.0.0
+        id: one
+        with:
+          value: "abc1234"
+          index_of_str: "ab"
+
+      - name: Set branch number env
+        id: step_one2
+        run: |
+          echo "branch_number=${{ steps.one.outputs.substring}}" >> $GITHUB_ENV
+
+      - name: Show vars
+        id: step_two
+        run: |
+          echo "branch_name - ${{ env.branch_name }}, branch_number - ${{ env.branch_number }}" 
+          echo "substring - ${{ steps.one.outputs.substring }} " 
+
+
       - name: Get Token
         run: | 
-          curl --location --request GET 'https://cpanel19.d.fozzy.com:2083/execute/SubDomain/addsubdomain?domain=${{ github.event.pull_request.head.ref }}&rootdomain=test-metall.site&dir=/stages/${{ github.event.pull_request.head.ref }}' --header 'Authorization: cpanel vychevs2:GVJV33J98LLRDASZU5A9JPGVMYI87RU1'
+          curl --location --request GET 'https://cpanel19.d.fozzy.com:2083/execute/SubDomain/addsubdomain?domain=${BRANCH}&rootdomain=test-metall.site&dir=/stages/${{ github.event.pull_request.head.ref }}' --header 'Authorization: cpanel vychevs2:GVJV33J98LLRDASZU5A9JPGVMYI87RU1'
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
@@ -21,4 +45,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           local-dir: ./src/
-          server-dir: ./stages/${{ github.event.pull_request.head.ref }}/
+          server-dir: ./stages/${BRANCH}/
