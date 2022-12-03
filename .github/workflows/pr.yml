@@ -23,7 +23,7 @@ jobs:
           index_of_str: "ab"
 
       - name: Set branch number env
-        id: step_one
+        id: step_one2
         run: |
           echo "branch_number=${{ steps.one.outputs.substring}}" >> $GITHUB_ENV
 
