@@ -4,9 +4,6 @@ on:
       - 'main'
       - 'releases/**-alpha'
 name: Deploy working branch on push
-runs:
-  using: 'node16'
-  main: 'index.js'
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -14,6 +11,15 @@ jobs:
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
+
+      - name: Hello world action step
+        id: hello
+        uses: octocat/hello-world-javascript-action@v1.1
+        with:
+            who-to-greet: 'Mona the Octocat'
+
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
 
       - name: Set output
         id: vars
