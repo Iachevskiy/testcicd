@@ -1,0 +1,40 @@
+on:
+  push:
+    branches:
+      - 'main'
+name: Deploy releases branch on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy releases
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+#      - name: Set output
+#        id: vars
+#        run: echo ::set-output name=branch::${GITHUB_REF#refs/*/}
+
+#      - uses: 8BitJonny/gh-get-current-pr@2.1.3
+#        id: PR
+
+# has pr
+#      - name: show pr if
+#        if: steps.PR.outputs.number > 0
+#        run: echo "has pr - ${{ steps.PR.outputs.number }}"
+
+# has not pr3
+#      - name: show has no pr
+#        if: ${{steps.PR.outputs.number  == ''}}
+#        run: echo "1 has no pr - ${{ steps.PR.outputs.number }}"
+
+
+      - name: 📂 Sync files
+#        if: steps.PR.outputs.number > 0
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        with:
+          server: ftp.test-metall.site
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          local-dir: ./testCiCd/
+          server-dir: ./stages/preprod/

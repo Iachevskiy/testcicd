@@ -1,0 +1,24 @@
+on:
+  pull_request:
+    types: [opened]
+name:  pull request working branch
+jobs:
+  web-deploy:
+    name: Pull request
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+      - name: Get Token
+        run: | 
+          curl --location --request GET 'https://cpanel19.d.fozzy.com:2083/execute/SubDomain/addsubdomain?domain=${{ github.event.pull_request.head.ref }}&rootdomain=test-metall.site&dir=/stages/${{ github.event.pull_request.head.ref }}' --header 'Authorization: cpanel vychevs2:GVJV33J98LLRDASZU5A9JPGVMYI87RU1'
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        with:
+          server: ftp.test-metall.site
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          local-dir: ./src/
+          server-dir: ./stages/${{ github.event.pull_request.head.ref }}/
