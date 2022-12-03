@@ -10,8 +10,8 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
-      - name: 🚚 Get BRANCH
-      - uses: bhowell2/github-substring-action
+      - name: substring-action
+        uses: bhowell2/github-substring-action@v1.0.0
         id: one
         env:
           BRANCH: ${{ github.ref_name }}
