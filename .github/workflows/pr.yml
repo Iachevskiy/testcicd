@@ -10,27 +10,23 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
-      - name: Get branch name
+      - name: Set branch name env
         id: step_one
         run: |
           echo "branch_name=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
-          
-      
 
-      - name: substring-action
+      - name: Get branch number
         uses: bhowell2/github-substring-action@v1.0.0
         id: one
         with:
           value: "abc1234"
           index_of_str: "ab"
-        run: |
-          echo "1 branch_name - ${{ env.branch_name }}" 
-          echo "1 substring - ${{ steps.one.outputs.substring }} " 
 
-      - name: Show vars
+      - name: Set branch number env
         id: step_two
         run: |
-          echo "branch_name - ${{ env.branch_name }}" 
+          echo "branch_number=${{ steps.one.outputs.substring}}" >> $GITHUB_ENV
+          echo "branch_name - ${{ env.branch_name }}, branch_number - ${{ env.branch_number }}" 
           echo "substring - ${{ steps.one.outputs.substring }} " 
 
 
