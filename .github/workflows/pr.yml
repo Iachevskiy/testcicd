@@ -18,10 +18,6 @@ jobs:
           value: "abc123"
           index_of_str: "ab"
 
-#      - name: Split branch name
-
-#        id: split
-#        run: echo "::set-output name=fragment::${BRANCH##*/}"
 
       - name: Get Token
         run: | 
