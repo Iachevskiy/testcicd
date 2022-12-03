@@ -23,6 +23,9 @@ jobs:
         with:
           value: "abc1234"
           index_of_str: "ab"
+        run: |
+          echo "1 branch_name - ${{ env.branch_name }}" 
+          echo "1 substring - ${{ steps.one.outputs.substring }} " 
 
       - name: Show vars
         id: step_two
