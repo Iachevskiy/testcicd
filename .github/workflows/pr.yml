@@ -10,6 +10,19 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
+      - name: Step one
+        id: step-one
+        # задаем имя и значение output для этого шага
+        run: echo "::set-output name=step-one-output::hello from step one"
+
+      - name: Step two
+        id: step-two
+          # 1. задаем имя и значение output для этого шага
+          # 2. получаем доступ к значению output первого шага
+        run: |
+            echo "::set-output name=step-two-output::hello from step two"
+            echo "Step one output: ${{ steps.step-one.outputs.step-one-output }}"
+
       - name: substring-action
         uses: bhowell2/github-substring-action@v1.0.0
         id: one
