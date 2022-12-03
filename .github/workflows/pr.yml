@@ -13,7 +13,7 @@ jobs:
       - name: Set the value
         id: step_one
         run: |
-          echo "branch_name=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "branch_name=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
       - name: Use the value
         id: step_two
         run: |
