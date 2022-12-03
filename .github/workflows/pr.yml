@@ -15,7 +15,7 @@ jobs:
         env:
           BRANCH: ${{ github.ref_name }}
         with:
-          value: "abc123"
+          value: "abc1234"
           index_of_str: "ab"
 
 
