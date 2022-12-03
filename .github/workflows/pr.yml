@@ -10,11 +10,11 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
-      - name: Split branch name
+#      - name: Split branch name
         env:
             BRANCH: ${{ github.ref_name }}
-        id: split
-        run: echo "::set-output name=fragment::${BRANCH##*/}"
+#        id: split
+#        run: echo "::set-output name=fragment::${BRANCH##*/}"
 
       - name: Get Token
         run: | 
