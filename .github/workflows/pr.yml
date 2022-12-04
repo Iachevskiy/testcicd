@@ -83,14 +83,10 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
             cd ./stages/${{env.branch_name}}/
             cd ~/bin
             ls
             ~/bin/npm -v
-            npm install
-            node app.js
 
       - name: Configure SSH
         run: |
