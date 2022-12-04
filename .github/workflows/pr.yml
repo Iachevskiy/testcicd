@@ -64,7 +64,8 @@ jobs:
           port: 22
           script: |
             whoami
-            ls -al 
+            ls -al
+            ls
 
 
       - name: Get Token
