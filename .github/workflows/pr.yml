@@ -30,7 +30,7 @@ jobs:
       - name: Set port by pr number env
         id: step_one22
         run: |
-          echo "PORT=00${{ github.event.pull_request.number}}" >> $GITHUB_ENV
+          echo "PORT=10${{ github.event.pull_request.number}}" >> $GITHUB_ENV
 
       - name: Show vars
         id: step_two
