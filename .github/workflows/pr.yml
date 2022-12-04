@@ -7,6 +7,9 @@ jobs:
     name: Pull request
     runs-on: ubuntu-latest
     steps:
+      - name: Node Js
+        uses: actions/setup-node@v1
+
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
