@@ -69,7 +69,6 @@ jobs:
           server: ftp.test-metall.site
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          local-dir: ./src/
           server-dir: ./stages/${{env.branch_name}}/
           exclude: |
             **/.github/**
