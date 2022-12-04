@@ -81,5 +81,5 @@ jobs:
           port: 22
           script: |
             cd ./stages/${{env.branch_name}}/
-            echo "npm install"
-            echo "node app.js"
+            run "npm install"
+            run "node app.js"
