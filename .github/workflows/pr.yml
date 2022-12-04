@@ -51,8 +51,6 @@ jobs:
 
       - name: 'Create htaccess file'
         run: |
-#          cd ./src
-#          ls
           touch .htaccess
           echo RewriteEngine On >> .htaccess
           echo "RewriteRule ^(.*)$ http://127.0.0.1:${{ env.PORT }}/\$1 [P,L]" >> .htaccess
