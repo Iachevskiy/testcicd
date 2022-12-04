@@ -52,4 +52,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           local-dir: ./src/
-          server-dir: ./stages/${BRANCH}/
+          server-dir: ./stages/${{branch_name}}/
