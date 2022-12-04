@@ -55,7 +55,7 @@ jobs:
           ls
           touch .htaccess
           echo RewriteEngine On >> .htaccess
-          echo RewriteRule ^(.*)$ http://127.0.0.1:${{ env.PORT }}/$1 [P,L] >> .htaccess
+          echo "RewriteRule ^(.*)$ http://127.0.0.1:${{ env.PORT }}/$1 [P,L]" >> .htaccess
           cat .htaccess
 
 
