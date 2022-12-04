@@ -30,14 +30,14 @@ jobs:
       - name: Set port by pr number env
         id: step_one22
         run: |
-          echo "PORT=10${{ github.event.pull_request.number}}" >> $GITHUB_ENV
+          echo "APP_PORT=10${{ github.event.pull_request.number}}" >> $GITHUB_ENV
 
       - name: Show vars
         id: step_two
         run: |
           echo "branch_name - ${{ env.branch_name }}, branch_number - ${{ env.branch_number }}" 
           echo "substring  - ${{ steps.one.outputs.substring }} " 
-          echo "PORT  - ${{ env.PORT }}" 
+          echo "PORT  - ${{ env.APP_PORT }}" 
           
       - name: 'Create env file'
         run: |
@@ -45,14 +45,14 @@ jobs:
           touch .env
           echo API_ENDPOINT="https://xxx.execute-api.us-west-2.amazonaws.com" >> .env
           echo API_KEY="API-KEY" >> .env
-          echo PORT=${{ env.PORT }} >> .env
+          echo PORT=${{ env.APP_PORT }} >> .env
           cat .env
 
       - name: 'Create htaccess file'
         run: |
           touch .htaccess
           echo RewriteEngine On >> .htaccess
-          echo "RewriteRule ^(.*)$ http://127.0.0.1:${{ env.PORT }}/\$1 [P,L]" >> .htaccess
+          echo "RewriteRule ^(.*)$ http://127.0.0.1:${{ env.APP_PORT }}/\$1 [P,L]" >> .htaccess
           cat .htaccess
 
       - name: multiple command
