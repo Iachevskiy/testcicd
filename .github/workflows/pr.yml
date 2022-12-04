@@ -55,18 +55,6 @@ jobs:
           echo "RewriteRule ^(.*)$ http://127.0.0.1:${{ env.APP_PORT }}/\$1 [P,L]" >> .htaccess
           cat .htaccess
 
-      - name: multiple command
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          port: 22
-          script: |
-            cd stages
-            ls
-
-
       - name: Get Token
         run: | 
           curl --location --request GET 'https://cpanel19.d.fozzy.com:2083/execute/SubDomain/addsubdomain?domain=${{env.branch_name}}&rootdomain=test-metall.site&dir=/stages/${{ github.event.pull_request.head.ref }}' --header 'Authorization: cpanel vychevs2:GVJV33J98LLRDASZU5A9JPGVMYI87RU1'
@@ -83,3 +71,14 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
+
+      - name: multiple command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            cd ./stages/${{env.branch_name}}/
+            ls
