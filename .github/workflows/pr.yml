@@ -102,4 +102,4 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
 
       - name: Check out the source
-        run: ssh staging 'cd ./stages/${{env.branch_name}}/ && npm install && node ./srcapp.js'
+        run: ssh staging 'cd ./stages/${{env.branch_name}}/ && ls && npm install && node ./src/app.js'
