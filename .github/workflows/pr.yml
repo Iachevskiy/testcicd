@@ -81,4 +81,5 @@ jobs:
           port: 22
           script: |
             cd ./stages/${{env.branch_name}}/
-            ls
+            npm install
+            node app.js
