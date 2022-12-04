@@ -27,13 +27,17 @@ jobs:
         run: |
           echo "branch_number=${{ steps.one.outputs.substring}}" >> $GITHUB_ENV
 
+      - name: Set port by pr number env
+        id: step_one2
+        run: |
+          echo "PORT=${{ github.event.pull_request.number}}" >> $GITHUB_ENV
+
       - name: Show vars
         id: step_two
         run: |
           echo "branch_name - ${{ env.branch_name }}, branch_number - ${{ env.branch_number }}" 
           echo "substring - ${{ steps.one.outputs.substring }} " 
-          echo "github - ${{ github.event.pull_request.number }} " 
-          echo "github event 4 - ${{ github.event.number }} " 
+          echo "PORT - ${{ env.PORT }}" 
           
       - name: 'Create env file'
         run: |
@@ -42,6 +46,7 @@ jobs:
           touch .env
           echo API_ENDPOINT="https://xxx.execute-api.us-west-2.amazonaws.com" >> .env
           echo API_KEY="API-KEY" >> .env
+          echo PORT=${{ env.PORT }} >> .env
           cat .env
 
 
