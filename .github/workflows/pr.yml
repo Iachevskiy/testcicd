@@ -32,6 +32,7 @@ jobs:
         run: |
           echo "branch_name - ${{ env.branch_name }}, branch_number - ${{ env.branch_number }}" 
           echo "substring - ${{ steps.one.outputs.substring }} " 
+          echo "github - ${{ github.event.pull_request}} " 
           
       - name: 'Create env file'
         run: |
