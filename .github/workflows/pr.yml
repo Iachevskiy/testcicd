@@ -37,7 +37,7 @@ jobs:
         run: |
           echo "branch_name - ${{ env.branch_name }}, branch_number - ${{ env.branch_number }}" 
           echo "substring  - ${{ steps.one.outputs.substring }} " 
-          echo "PORT - ${{ env.PORT }}" 
+          echo "PORT ll - ${{ env.PORT }}" 
           
       - name: 'Create env file'
         run: |
