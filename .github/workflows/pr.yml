@@ -10,9 +10,56 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
+      - name: Set branch name env
+        id: step_one
+        run: |
+          echo "branch_name=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
+
+      - name: Get branch number
+        uses: bhowell2/github-substring-action@v1.0.0
+        id: one
+        with:
+          value: ${{ env.branch_name }}
+          index_of_str: "mp-"
+
+      - name: Set branch number env
+        id: step_one2
+        run: |
+          echo "branch_number=${{ steps.one.outputs.substring}}" >> $GITHUB_ENV
+
+      - name: Set port by pr number env
+        id: step_one22
+        run: |
+          echo "PORT=10${{ github.event.pull_request.number}}" >> $GITHUB_ENV
+
+      - name: Show vars
+        id: step_two
+        run: |
+          echo "branch_name - ${{ env.branch_name }}, branch_number - ${{ env.branch_number }}" 
+          echo "substring  - ${{ steps.one.outputs.substring }} " 
+          echo "PORT - ${{ env.PORT }}" 
+          
+      - name: 'Create env file'
+        run: |
+#          cd ./src
+          ls
+          touch .env
+          echo API_ENDPOINT="https://xxx.execute-api.us-west-2.amazonaws.com" >> .env
+          echo API_KEY="API-KEY" >> .env
+          echo PORT=${{ env.PORT }} >> .env
+          cat .env
+
+      - name: 'Create htaccess file'
+        run: |
+          touch .htaccess
+          echo RewriteEngine On >> .htaccess
+          echo "RewriteRule ^(.*)$ http://127.0.0.1:${{ env.PORT }}/\$1 [P,L]" >> .htaccess
+          cat .htaccess
+
+
       - name: Get Token
         run: | 
-          curl --location --request GET 'https://cpanel19.d.fozzy.com:2083/execute/SubDomain/addsubdomain?domain=${{ github.event.pull_request.head.ref }}&rootdomain=test-metall.site&dir=/stages/${{ github.event.pull_request.head.ref }}' --header 'Authorization: cpanel vychevs2:GVJV33J98LLRDASZU5A9JPGVMYI87RU1'
+          curl --location --request GET 'https://cpanel19.d.fozzy.com:2083/execute/SubDomain/addsubdomain?domain=${{env.branch_name}}&rootdomain=test-metall.site&dir=/stages/${{ github.event.pull_request.head.ref }}' --header 'Authorization: cpanel vychevs2:GVJV33J98LLRDASZU5A9JPGVMYI87RU1'
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
@@ -20,5 +67,9 @@ jobs:
           server: ftp.test-metall.site
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          local-dir: ./src/
-          server-dir: ./stages/${{ github.event.pull_request.head.ref }}/
+          server-dir: ./stages/${{env.branch_name}}/
+          exclude: |
+            **/.github/**
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
