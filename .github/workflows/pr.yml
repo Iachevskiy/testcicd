@@ -71,3 +71,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           local-dir: ./src/
           server-dir: ./stages/${{env.branch_name}}/
+          exclude: |
+            **/.github/**
