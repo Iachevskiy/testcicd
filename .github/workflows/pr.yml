@@ -65,6 +65,7 @@ jobs:
           script: |
             whoami
             ls -al
+            cd stages
             ls
 
 
