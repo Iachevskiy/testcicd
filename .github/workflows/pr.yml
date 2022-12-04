@@ -87,6 +87,7 @@ jobs:
             cd ~/bin
             ls
             ~/bin/npm -v
+            echo $PATH
 
       - name: Configure SSH
         run: |
