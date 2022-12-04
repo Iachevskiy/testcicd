@@ -55,6 +55,15 @@ jobs:
           echo "RewriteRule ^(.*)$ http://127.0.0.1:${{ env.PORT }}/\$1 [P,L]" >> .htaccess
           cat .htaccess
 
+      - name: multiple command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            ls 
+
 
       - name: Get Token
         run: | 
