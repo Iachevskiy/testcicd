@@ -28,7 +28,7 @@ jobs:
           echo "branch_number=${{ steps.one.outputs.substring}}" >> $GITHUB_ENV
 
       - name: Set port by pr number env
-        id: step_one2
+        id: step_one22
         run: |
           echo "PORT=${{ github.event.pull_request.number}}" >> $GITHUB_ENV
 
