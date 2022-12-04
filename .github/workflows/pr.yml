@@ -72,3 +72,6 @@ jobs:
           server-dir: ./stages/${{env.branch_name}}/
           exclude: |
             **/.github/**
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
