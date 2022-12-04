@@ -83,9 +83,11 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             cd ./stages/${{env.branch_name}}/
-            echo "npm install"
-            echo "node app.js"
+            npm install
+            node app.js
 
       - name: Configure SSH
         run: |
@@ -105,4 +107,6 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
 
       - name: Check out the source
+
         run: ssh staging 'cd ./stages/${{env.branch_name}}/ && ls && node -v && npm install && node ./src/app.js'
+
