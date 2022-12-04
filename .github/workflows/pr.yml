@@ -86,6 +86,8 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd ./stages/${{env.branch_name}}/
+            cd ~/bin
+            ls
             sudo npm -v
             npm install
             node app.js
