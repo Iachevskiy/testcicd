@@ -83,6 +83,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
+            export PATH="/usr/local/cpanel/3rdparty/lib/path-bin:/opt/perl/5.32/bin:/usr/local/cpanel/3rdparty/lib/path-bin:/usr/local/jdk/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/X11R6/bin:/usr/local/bin:/usr/X11R6/bin:/root/bin:/opt/bin:/opt/cpanel/composer/bin:/opt/dell/srvadmin/bin:/home/vychevs2/.local/bin:/home/vychevs2/bin"
             cd ./stages/${{env.branch_name}}/
             cd ~/bin
             ls
@@ -109,4 +110,5 @@ jobs:
       - name: Check out the source
 
         run: ssh staging 'cd ./stages/${{env.branch_name}}/ && ls && node -v && npm install && node ./src/app.js'
+
 

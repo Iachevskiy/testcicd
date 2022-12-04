@@ -13,3 +13,7 @@ const server = http.createServer((req, res) => {
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+
+// /usr/local/cpanel/3rdparty/lib/path-bin:/opt/perl/5.32/bin:/usr/local/cpanel/3rdparty/lib/path-bin:/usr/local/bin:/usr/bin:/opt/cpanel/composer/bin:/opt/dell/srvadmin/bin
+// /usr/local/cpanel/3rdparty/lib/path-bin:/opt/perl/5.32/bin:/usr/local/cpanel/3rdparty/lib/path-bin:/usr/local/jdk/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/X11R6/bin:/usr/local/bin:/usr/X11R6/bin:/root/bin:/opt/bin:/opt/cpanel/composer/bin:/opt/dell/srvadmin/bin:/home/vychevs2/.local/bin:/home/vychevs2/bin
