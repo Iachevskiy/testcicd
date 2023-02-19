@@ -1,8 +1,8 @@
 on:
   push:
     branches-ignore:
-      - 'main'
-      - 'releases/**-alpha'
+      - '1main'
+      - '1releases/**-alpha'
 name: Deploy working branch on push
 jobs:
   web-deploy:
