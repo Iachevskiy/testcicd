@@ -48,6 +48,4 @@ jobs:
           port: 22
           script: |
             export PATH="/usr/local/cpanel/3rdparty/lib/path-bin:/opt/perl/5.32/bin:/usr/local/cpanel/3rdparty/lib/path-bin:/usr/local/jdk/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/X11R6/bin:/usr/local/bin:/usr/X11R6/bin:/root/bin:/opt/bin:/opt/cpanel/composer/bin:/opt/dell/srvadmin/bin:/home/vychevs2/.local/bin:/home/vychevs2/bin"
-            cd ./public_html/
-            ls
-            node app.js
+            
