@@ -39,14 +39,17 @@ jobs:
           local-dir: ./src/
           server-dir: ./public_html/
 
-      - name: Load private SSH key
-        uses: webfactory/ssh-agent@v0.5.3
+      - name: multiple command
+        uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.CPANEL_SSH_KEY }}
-
-      - name: Atomic Deploy
-        run: |
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << EOF
-            whoami
-          EOF
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.CPANEL_SSH_KEY }}
+          port: 22
+          script: |
+            export PATH="/usr/local/cpanel/3rdparty/lib/path-bin:/opt/perl/5.32/bin:/usr/local/cpanel/3rdparty/lib/path-bin:/usr/local/jdk/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/X11R6/bin:/usr/local/bin:/usr/X11R6/bin:/root/bin:/opt/bin:/opt/cpanel/composer/bin:/opt/dell/srvadmin/bin:/home/vychevs2/.local/bin:/home/vychevs2/bin"
+            cd ./stages/${{env.branch_name}}/
+            npm -v
+            npm install
+            node ./src/app.js
       
