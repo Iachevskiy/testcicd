@@ -36,5 +36,5 @@ jobs:
           server: ftp.test-metall.site
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          local-dir: ./testCiCd/
+          local-dir: ./src/
           server-dir: ./public_html/
