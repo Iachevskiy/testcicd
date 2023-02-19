@@ -39,10 +39,14 @@ jobs:
           local-dir: ./src/
           server-dir: ./public_html/
 
-      - name: multiple command
-        uses: appleboy/ssh-action@master
+      - name: Load private SSH key
+        uses: webfactory/ssh-agent@v0.5.3
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.CPANEL_SSH_KEY }}
-          port: 22
+          ssh-private-key: ${{ secrets.CPANEL_SSH_KEY }}
+
+      - name: Atomic Deploy
+        run: |
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << EOF
+            whoami
+          EOF
+      
